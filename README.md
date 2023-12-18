@@ -45,4 +45,21 @@ To scan the website https://example.com, run:
 python urlscan-api.py https://example.com
 ```
 
+## Using Docker
+You can also run the script inside a Docker container. This approach ensures that the script runs in a consistent environment.
+
+**Building the Docker Image**
+
+First, build the Docker image from the Dockerfile in your project directory:
+```bash
+docker build -t urlscan-api .
+```
+This command builds a Docker image and tags it as **urlscan-api**.
+
+**Running the Docker Container**
+To run the script inside a Docker container, use the following command:
+```bash
+docker run -e URLSCAN_API_KEY=your_api_key_here urlscan-script python urlscan-api.py [URL]
+```
+Replace your_api_key_here with your actual URLScan.io API key and [URL] with the URL you want to scan.
 
