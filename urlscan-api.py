@@ -1,6 +1,7 @@
 import requests
 import time
 import argparse
+import os
 
 def scan_url(api_key, url):
     headers = {
@@ -33,12 +34,18 @@ def get_scan_result(api_key, uuid, max_wait_time=300):
 
 def main():
     parser = argparse.ArgumentParser(description='Scan a URL using URLScan.io API')
-    parser.add_argument('url', help='The URL to scan')
+    parser.add_argument('url', nargs='?', help='The URL to scan')
     args = parser.parse_args()
 
-    # Replace 'your_api_key_here' with your actual API key
-    api_key = 'your_api_key_here'
-    url_to_scan = args.url
+    # Get API key from environment variable
+    api_key = os.getenv('URLSCAN_API_KEY')
+    if not api_key:
+        raise Exception("URLSCAN_API_KEY environment variable not set.")
+
+    # Use URL from command-line argument or environment variable
+    url_to_scan = args.url or os.getenv('URLSCAN_URL')
+    if not url_to_scan:
+        raise Exception("No URL provided. Please provide a URL as an argument or through the URLSCAN_URL environment variable.")
 
     # Scan a URL
     scan_response = scan_url(api_key, url_to_scan)
