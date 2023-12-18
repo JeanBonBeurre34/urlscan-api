@@ -59,7 +59,7 @@ This command builds a Docker image and tags it as **urlscan-api**.
 **Running the Docker Container**
 To run the script inside a Docker container, use the following command:
 ```bash
-docker run -e URLSCAN_API_KEY=your_api_key_here urlscan-script python urlscan-api.py [URL]
+docker run -e URLSCAN_API_KEY=your_api_key -e URLSCAN_URL=[URL] urlscan-api
 ```
 Replace your_api_key_here with your actual URLScan.io API key and [URL] with the URL you want to scan.
 
